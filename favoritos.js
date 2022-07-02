@@ -8,10 +8,10 @@ if(JSON.parse(localStorage.getItem('favoritos'))) {
 }
 
 const totalfavoritos = () => {
-    return favoritos.reduce((acc, auto) => acc + auto.precio, 0)
+    return favoritos.reduce((acc, auto) => acc + auto.precio * auto.cantidad, 0)
 }
 
-const body = document.getElementById('favoritos');
+const body = document.getElementById('favContainer');
 if (favoritos.length == 0) {
     const texto = `
     <div class='favContainer'>
@@ -21,7 +21,7 @@ if (favoritos.length == 0) {
         </a>
     </div>`;        
     body.innerHTML += texto;    
-} /* else {
+} else {
     const titulo = `
     <div class'favContainer'>
         <h1 class='txtFavoritos'>Favoritos</h1>
@@ -55,15 +55,16 @@ if (favoritos.length == 0) {
     body.innerHTML += table
     const tbody = document.getElementById('tbody')
     for (let i = 0; i < favoritos.length; i++) {
-        const element = favoritos[i];
+        const element = favoritos [i];
         const { id, auto, precio, img } = element;
         const favoritos = `
         <tr id=${id}>
-            <th><img class="trash" src="" alt="basura" srcset=""></th>
+            <th><img class="trash" src="./img/basura.png" alt="basura" srcset=""></th>
             <th class="detallesTabla"><img class="imgAutoFav" src="${img}" alt="auto"><span class="nombreauto">${auto}</span></th>
-            <th>$${precio.toLocaleString()}</th>
+            <th>${cantidad}</th>
+            <th>$${(cantidad * precio).toLocaleString()}</th>
         </tr>
         `
         tbody.innerHTML += favoritos;
         }
-} */
+}

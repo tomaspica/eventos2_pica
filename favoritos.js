@@ -7,6 +7,10 @@ if(JSON.parse(localStorage.getItem('favoritos'))) {
   favoritos = JSON.parse(localStorage.getItem('favoritos'))
 }
 
+const totalfavoritos = () => {
+    return favoritos.reduce((acc, auto) => acc + auto.precio, 0)
+}
+
 const body = document.getElementById('favoritos');
 if (favoritos.length == 0) {
     const texto = `
@@ -17,7 +21,7 @@ if (favoritos.length == 0) {
         </a>
     </div>`;        
     body.innerHTML += texto;    
-} else {
+} /* else {
     const titulo = `
     <div class'favContainer'>
         <h1 class='txtFavoritos'>Favoritos</h1>
@@ -62,4 +66,4 @@ if (favoritos.length == 0) {
         `
         tbody.innerHTML += favoritos;
         }
-}
+} */

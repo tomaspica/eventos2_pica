@@ -69,7 +69,16 @@ let autos = [
     const btn = e.target;
     const idBoton = btn.getAttribute('id')
     const autoEncontrado = autos.find(aut => aut.id == idBoton)
-    console.log(autoEncontrado)  
+    const enFavoritos = favoritos.find(aut => aut.id == autoEncontrado.id)
+    console.log(enFavoritos)
+    if(!enFavoritos) {
+      favoritos.push({...autoEncontrado, cantidad: 1})
+    } else {
+      let favoritosFiltrado = favoritos.filter(aut => aut.id != enFavoritos.id)
+      favoritos = [...favoritosFiltrado, {...enFavoritos, cantidad: enFavoritos.cantidad + 1}]
+    }
+    console.log(favoritos)
+    localStorage.setItem('favoritos', JSON.stringify(favoritos))
   }
   
   const contador = document.getElementById('favCounter')

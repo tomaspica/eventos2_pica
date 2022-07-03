@@ -2,21 +2,21 @@ let autos = [
     {
       "id":"001",
       "auto":"Honda Civic",
-      "precio":"50.000",
+      "precio":"50000",
       "img":"./img/hondacivic.png",
       "desc":""
     },
     {
       "id":"002",
       "auto":"Ford Mondeo",
-      "precio":"90.000",
+      "precio":"90000",
       "img":"./img/fordmondeo.png",
       "desc":""
     },
     {
       "id":"003",
       "auto":"Chevrolet Cruze",
-      "precio":"70.000",
+      "precio":"70000",
       "img":"./img/cruze.png",
       "desc":""
     },

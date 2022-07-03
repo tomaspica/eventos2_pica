@@ -7,10 +7,6 @@ if(JSON.parse(localStorage.getItem('favoritos'))) {
   favoritos = JSON.parse(localStorage.getItem('favoritos'))
 }
 
-const totalfavoritos = () => {
-    return favoritos.reduce((acc, auto) => acc + auto.precio * auto.cantidad, 0)
-}
-
 const body = document.getElementById('favContainer');
 if (favoritos.length == 0) {
     const texto = `
@@ -39,32 +35,45 @@ if (favoritos.length == 0) {
         </thead>
         <Tbody id="tbody">
         </Tbody>
-        <tfoot>
-            <tr>
-                <th></th>
-                <th></th>
-                <th class="txtTotal">Total:</th>
-                <th id="total">$${totalfavoritos().toLocaleString()}</th>
-            </tr>
-        </tfoot>
     </table>
     </div>
-    <div class="btn-container">
-        <button class="btnBorrar"> BORRAR FAVORITOS</button>
-    </div>`;
+     <div class="btn-container">
+        <button id="btnBorrar" class="btnBorrar"> BORRAR FAVORITOS</button>
+    </div>
+    <div>
+    <a class='btnVolver' href='index.html'>
+        <button>VOLVER</button>
+    </a>
+    </div`;
     body.innerHTML += table
     const tbody = document.getElementById('tbody')
     for (let i = 0; i < favoritos.length; i++) {
         const element = favoritos [i];
-        const { id, auto, precio, img } = element;
-        const favoritos = `
+        const { id, auto, precio, img, cantidad } = element;
+        const fav = `
         <tr id=${id}>
-            <th><img class="trash" src="./img/basura.png" alt="basura" srcset=""></th>
-            <th class="detallesTabla"><img class="imgAutoFav" src="${img}" alt="auto"><span class="nombreauto">${auto}</span></th>
+            <th><img class="trash" src="./img/basura.png" height="50px" alt="basura" srcset=""></th>
+            <th class="detallesTabla"><img class="imgAutoFav" height="200px" src="${img}" alt="auto"><span class="nombreauto">${auto}</span></th>
             <th>${cantidad}</th>
             <th>$${(cantidad * precio).toLocaleString()}</th>
         </tr>
         `
-        tbody.innerHTML += favoritos;
+        tbody.innerHTML += fav;
         }
+        
+    
+    /* const btnBorrar = document.getElementsByClassName('btnBorrar')
+    for(let i =0; i < btnBorrar.length ; i++){
+        btnBorrar[i].addEventListener("click", BorrarFavoritos)}
+        function BorrarFavoritos(e) {
+            const btn = e.target
+            const btnBorrar = btn.getElementsByClassName('btnBorrar')
+            
+        } */
+        let BorrarFavoritos = document.getElementById("btnBorrar");
+        BorrarFavoritos.onclick = () => {
+        favoritos = []
+        localStorage.setItem('favoritos', JSON.stringify(favoritos))
+    }
+         
 }
